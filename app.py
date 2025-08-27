@@ -1,9 +1,16 @@
 from flask import Flask
 import requests
-from models import Movie
+from models import db, Movie
 from data_manager import DataManager
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///movies.db' # Choose a name for your database
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.init_app(app)  # Link the database and the app. This is the reason you need to import db from models
+
+data_manager = DataManager() # Create an object of your DataManager class
+
 
 
 @app.route('/')
