@@ -45,6 +45,13 @@ def add_movie(title):
     dm.add_movie(movie)
     return f"{movie.name} successfully added!"
 
+
+@app.route('/users')
+def list_users():
+    users = data_manager.get_users()
+    return str(users)  # Temporarily returning users as a string
+
+
 """
 if __name__ == '__main__':
   with app.app_context():
