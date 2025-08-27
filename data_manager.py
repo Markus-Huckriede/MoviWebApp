@@ -28,7 +28,12 @@ class DataManager:
         db.session.commit()
 
     def update_movie(self, movie_id, new_title):
-        pass
+        movie = Movie.query.get(movie_id)
+        if movie:
+            movie.name = new_title
+            db.session.commit()
+            return f"Movie '{new_title}' updated"
+        return f"Movie with ID {movie_id} not found"
 
     def delete_movie(self, movie_id):
         pass

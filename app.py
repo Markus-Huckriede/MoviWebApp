@@ -44,3 +44,11 @@ def add_movie(title):
     dm = DataManager()
     dm.add_movie(movie)
     return f"{movie.name} successfully added!"
+
+"""
+if __name__ == '__main__':
+  with app.app_context():
+    db.create_all()
+
+  app.run()
+"""
