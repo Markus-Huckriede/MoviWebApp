@@ -6,6 +6,11 @@ from data_manager import DataManager
 app = Flask(__name__)
 
 
+@app.route('/')
+def home():
+    return "Welcome to MoviWeb App!"
+
+
 @app.route("/add_movie/<title>")
 def add_movie(title):
     API_KEY = ""
