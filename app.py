@@ -16,34 +16,18 @@ data_manager = DataManager() # Create an object of your DataManager class
 @app.route('/')
 def home():
     users = data_manager.get_users()
-    return render_template('home.html', users=users)
+    return render_template('index.html', users=users)
 
 
 @app.route("/add_movie/<title>")
 def add_movie(title):
     API_KEY = ""
-    url = f"http://www.omdbapi.com/?t={title}&apikey={API_KEY}"
-    response = requests.get(url).json()
-    '''
-    Error handling if movie does not exist
-    '''
-    if response.get("Response") == "False":
-        return f"Movie '{title}' not found in OMDb.", 404
+    # DataManager -> OMDb and create Movie
+    movie = data_manager.add_movie(title=title, user_id=1, api_key=API_KEY)
 
-    '''
-    creating movie object
-    '''
-    movie = Movie(
-        name=response["Title"],
-        director=response["Director"],
-        year=response["Year"],
-        poster_url=response["Poster"],
-        user_id = 1
-    )
-    '''
-    save movie
-    '''
-    data_manager.add_movie(movie)
+    if movie is None:
+        return f"Movie '{title}' mot found.", 404
+
     return f"{movie.name} successfully added!"
 
 
@@ -75,21 +59,33 @@ def list_movies(user_id):
 
 @app.route('/users/<int:user_id>/movies/<int:movie_id>/delete', methods=['POST'])
 def delete_movie(user_id, movie_id):
-    msg = data_manager.delete_movie(movie_id)
-    return redirect(url_for('list_movies', user_id=user_id))
+    data_manager.delete_movie(movie_id)
+    return redirect(url_for('user_movies', user_id=user_id))
 
 
 @app.route('/users/<int:user_id>/movies', methods=['GET', 'POST'])
 def user_movies(user_id):
     if request.method == "GET":
-        movies = data_manager.get_movies(user_id)
+        try:
+            movies = data_manager.get_movies(user_id)
+        except Exception as e:
+            return f"Loading movie failed: {e}", 500
         return render_template("movies.html", movies=movies, user_id=user_id)
+
     elif request.method == "POST":
-        # add new movie
         title = request.form.get("title")
-        # OMDb, create movie
-        data_manager.add_movie(movie)
+        if title:
+            API_KEY = ""
+            try:
+                data_manager.add_movie(title=title, user_id=user_id, api_key=API_KEY)
+            except Exception as e:
+                return f"Adding movie failed: {e}", 500
     return redirect(url_for("user_movies", user_id=user_id))
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 
 if __name__ == '__main__':

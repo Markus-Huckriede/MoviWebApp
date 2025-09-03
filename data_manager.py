@@ -20,7 +20,19 @@ class DataManager:
         return Movie.query.filter_by(user_id=user_id).all()
 
 
-    def add_movie(self, movie):
+    def add_movie(self, title, user_id, api_key):
+        import requests
+        url = f"http://www.omdbapi.com/?t={title}&apikey={api_key}"
+        response = requests.get(url).json()
+        if response.get("Response") == "False":
+            return None
+        movie = Movie(
+            name=response["Title"],
+            director=response["Director"],
+            year=response["Year"],
+            poster_url=response["Poster"],
+            user_id=user_id
+        )
         db.session.add(movie)
         db.session.commit()
         return movie
