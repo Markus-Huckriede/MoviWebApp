@@ -1,5 +1,5 @@
+from config import API_KEY
 from flask import Flask, request, render_template, url_for, redirect
-import requests
 from models import db, Movie
 from data_manager import DataManager
 

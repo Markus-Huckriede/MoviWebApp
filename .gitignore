@@ -1,3 +1,6 @@
+# Verhindert, dass die config.py ins Git kommt
+config.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
