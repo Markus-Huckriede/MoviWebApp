@@ -16,9 +16,9 @@
 </nav>
 
 {% if movie.poster_url and movie.poster_url != "N/A" %}
-    <img src="{{ movie.poster_url }}" alt="{{ movie.name }}" width="200">
+<img src="{{ movie.poster_url }}" alt="{{ movie.name }}" width="200">
 {% else %}
-    <p>No poster available</p>
+<p>No poster available</p>
 {% endif %}
 
 <p><strong>Year:</strong> {{ movie.year }}</p>

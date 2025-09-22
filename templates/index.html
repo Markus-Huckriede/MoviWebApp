@@ -5,7 +5,7 @@
     <title>Main</title>
 </head>
 <body>
-    {% extends "base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 <h1>Users</h1>
@@ -21,7 +21,9 @@
 
             <!-- Delete-Form -->
             <form method="POST" action="{{ url_for('delete_user', user_id=user.id) }}" style="margin: 0;">
-                <button type="submit" style="background-color: #e74c3c; color: #fff; border-radius: 5px; padding: 5px 10px;">Delete</button>
+                <button type="submit"
+                        style="background-color: #e74c3c; color: #fff; border-radius: 5px; padding: 5px 10px;">Delete
+                </button>
             </form>
         </div>
     </li>

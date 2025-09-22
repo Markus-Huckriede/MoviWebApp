@@ -2,6 +2,7 @@ from models import db, User, Movie
 from config import API_KEY
 import requests
 
+
 class DataManager:
     def __init__(self):
         self.api_key = API_KEY

@@ -18,18 +18,18 @@
 
 <ul class="movie-list">
     {% for movie in movies %}
-        <li>
-            <a href="{{ url_for('movie_detail', user_id=user.id, movie_id=movie.id) }}">
-                {% if movie.poster_url and movie.poster_url != "N/A" %}
-                    <img src="{{ movie.poster_url }}" alt="{{ movie.name }}" width="150">
-                {% else %}
-                    <span>No poster available</span>
-                {% endif %}
-                <strong>{{ movie.name }}</strong>
-            </a>
-            <p><strong>Year:</strong> {{ movie.year }}</p>
-            <p><strong>Director:</strong> {{ movie.director }}</p>
-        </li>
+    <li>
+        <a href="{{ url_for('movie_detail', user_id=user.id, movie_id=movie.id) }}">
+            {% if movie.poster_url and movie.poster_url != "N/A" %}
+            <img src="{{ movie.poster_url }}" alt="{{ movie.name }}" width="150">
+            {% else %}
+            <span>No poster available</span>
+            {% endif %}
+            <strong>{{ movie.name }}</strong>
+        </a>
+        <p><strong>Year:</strong> {{ movie.year }}</p>
+        <p><strong>Director:</strong> {{ movie.director }}</p>
+    </li>
     {% endfor %}
 </ul>
 {% endblock %}
