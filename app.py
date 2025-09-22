@@ -26,17 +26,21 @@ def add_user():
 
 @app.route('/users/<int:user_id>/movies', methods=['GET', 'POST'])
 def user_movies(user_id):
+    user = User.query.get(user_id)  # <-- User holen
+    if not user:
+        return "User not found", 404
+
     if request.method == "POST":
         title = request.form.get("title")
         if title:
-            # Add Movie via OMDb API (inkl. Debugging in add_movie)
             movie = data_manager.add_movie(title=title, user_id=user_id)
             if movie is None:
                 return f"Movie '{title}' not found.", 404
         return redirect(url_for("user_movies", user_id=user_id))
 
     movies = data_manager.get_movies(user_id)
-    return render_template("movies.html", movies=movies, user_id=user_id)
+    return render_template("movies.html", movies=movies, user=user)
+
 
 
 

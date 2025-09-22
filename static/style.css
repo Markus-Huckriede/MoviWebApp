@@ -1,4 +1,4 @@
-/* style */
+/* Allgemein */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f9f9f9;
@@ -22,22 +22,31 @@ header a {
     text-decoration: none;
 }
 
+/* Navigation */
 nav a {
+    display: inline-block;
     margin-right: 15px;
-    color: #ecf0f1;
+    padding: 6px 12px;
+    text-decoration: none;
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s;
 }
 
 nav a:hover {
-    color: #f39c12;
+    background-color: #2980b9;
 }
 
+/* Container */
 .container {
     max-width: 1000px;
     margin: 20px auto;
     padding: 0 20px;
 }
 
-/* Userlist */
+/* Listen */
 ul {
     list-style: none;
     padding: 0;
@@ -47,7 +56,7 @@ ul li {
     margin: 10px 0;
 }
 
-/* movie list */
+/* Movie-Liste */
 .movie-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -75,6 +84,7 @@ ul li {
     margin-bottom: 10px;
 }
 
+/* Buttons Movie-Liste */
 .movie-list button {
     background-color: #e74c3c;
     color: #fff;
@@ -82,13 +92,15 @@ ul li {
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 5px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .movie-list button:hover {
     background-color: #c0392b;
 }
 
+/* Formulare */
 form input[type="text"] {
     padding: 5px;
     width: 70%;
@@ -102,13 +114,41 @@ form button[type="submit"] {
     border: none;
     background-color: #3498db;
     color: #fff;
-    cursor: pointer;
 }
 
-form button[type="submit"]:hover {
-    background-color: #2980b9;
-}
-/* Punshlines */
+/* Überschriften */
 h1, h2, h3 {
     color: #2c3e50;
 }
+/* Abstand Navigation zum Cover */
+nav {
+    margin-bottom: 10px;
+}
+
+/* Buttons in Movie Details */
+.movie-detail-buttons {
+    margin-top: 20px;
+}
+
+.movie-detail-buttons form button {
+    padding: 6px 12px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Delete-Button Details */
+#delete-btn {
+    background-color: red;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+
+

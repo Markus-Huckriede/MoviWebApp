@@ -8,11 +8,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Movies for User {{ user_id }}</h1>
-
+<h1>Movies for {{ user.name }}</h1>
 
 <h3>Add New Movie</h3>
-<form method="POST" action="{{ url_for('user_movies', user_id=user_id) }}">
+<form method="POST" action="{{ url_for('user_movies', user_id=user.id) }}">
     <input type="text" name="title" placeholder="Movie Title" required>
     <button type="submit">Add Movie</button>
 </form>
@@ -20,7 +19,7 @@
 <ul class="movie-list">
     {% for movie in movies %}
         <li>
-            <a href="{{ url_for('movie_detail', user_id=user_id, movie_id=movie.id) }}">
+            <a href="{{ url_for('movie_detail', user_id=user.id, movie_id=movie.id) }}">
                 {% if movie.poster_url and movie.poster_url != "N/A" %}
                     <img src="{{ movie.poster_url }}" alt="{{ movie.name }}" width="150">
                 {% else %}
@@ -30,12 +29,6 @@
             </a>
             <p><strong>Year:</strong> {{ movie.year }}</p>
             <p><strong>Director:</strong> {{ movie.director }}</p>
-
-            <form method="POST"
-                  action="{{ url_for('delete_movie', user_id=user_id, movie_id=movie.id) }}"
-                  style="display:inline;">
-                <button type="submit">Delete</button>
-            </form>
         </li>
     {% endfor %}
 </ul>
