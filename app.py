@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for
-from models import db, User, Movie
+from models import db, User
 from data_manager import DataManager
 
 app = Flask(__name__)
@@ -26,6 +26,9 @@ def add_user():
 
 @app.route('/users/<int:user_id>/movies', methods=['GET', 'POST'])
 def user_movies(user_id):
+    """
+
+    """
     user = User.query.get(user_id)
     if not user:
         return "User not found", 404
@@ -74,9 +77,9 @@ def update_movie(user_id, movie_id):
 
 @app.route('/users/<int:user_id>/movies/<int:movie_id>', methods=['GET', 'POST'])
 def movie_detail(user_id, movie_id):
-    '''
+    """
     Detailseite: Filmliste eines Users
-    '''
+    """
     movie = data_manager.get_movie(user_id, movie_id)
     if not movie:
         return "Movie not found", 404
