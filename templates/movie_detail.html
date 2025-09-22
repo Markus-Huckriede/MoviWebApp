@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ movie.name }}</title>
+</head>
+<body>
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ movie.name }}</h1>
+
+<nav>
+    <a class="home-btn" href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('user_movies', user_id=user_id) }}">Back to Movies</a>
+</nav>
+
+{% if movie.poster_url and movie.poster_url != "N/A" %}
+    <img src="{{ movie.poster_url }}" alt="{{ movie.name }}" width="200">
+{% else %}
+    <p>No poster available</p>
+{% endif %}
+
+<p><strong>Year:</strong> {{ movie.year }}</p>
+<p><strong>Director:</strong> {{ movie.director }}</p>
+<p><strong>Plot:</strong> {{ movie.plot or "No description available" }}</p>
+
+<h3>Update Movie</h3>
+<form method="POST" action="{{ url_for('movie_detail', user_id=user_id, movie_id=movie.id) }}">
+    <input type="text" name="name" placeholder="New Title" value="{{ movie.name }}">
+    <input type="text" name="director" placeholder="New Director" value="{{ movie.director }}">
+    <input type="text" name="year" placeholder="New Year" value="{{ movie.year }}">
+    <button type="submit">Update</button>
+</form>
+
+<!-- Delete Movie -->
+<form method="POST"
+      action="{{ url_for('delete_movie', user_id=user_id, movie_id=movie.id) }}">
+    <button type="submit">Delete Movie</button>
+</form>
+
+{% endblock %}
+</body>
+</html>

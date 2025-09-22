@@ -12,4 +12,5 @@ class Movie(db.Model):
     director = db.Column(db.String(100),nullable=False)
     year = db.Column(db.String(100), nullable=False)
     poster_url = db.Column(db.String(100),nullable=False)
+    plot = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
